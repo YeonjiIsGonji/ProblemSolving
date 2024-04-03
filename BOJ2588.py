@@ -1,0 +1,13 @@
+first = input()
+second = input()
+num1 = int(first)
+num2 = int(second)
+list2 = list(map(int,str(second)))
+num3 = num1 * int(list2[2])
+num4 = num1 * int(list2[1])
+num5 = num1 * int(list2[0])
+num6 = num1 * num2
+print(num3)
+print(num4)
+print(num5)
+print(num6)

@@ -1,0 +1,8 @@
+list = input().split()
+A = int(list[0])
+B = int(list[1])
+print(A + B)
+print(A - B)
+print(A * B)
+print(A // B)
+print(A % B)
