@@ -24,22 +24,32 @@ public class BOJ2798 {
         List<Integer> combination = new ArrayList<>();
         int sum = 0;
         for (int i = 0; i < N - 2; i++) {
-            for (int j = 0; j < N - 2; j++) {
-                sum = card.get(i) + card.get(i+1) + card.get(j+2);
-                combination.add(sum);
+            for (int j = i + 1; j < N - 1; j++) {
+                for (int k = j + 1; k < N; k++) {
+                    sum = card.get(i) + card.get(j) + card.get(k);
+                    combination.add(sum);
+                }
             }
         }
 
-        combination.sort(Comparator.reverseOrder());
-
-        System.out.println(combination);
-//        for (int i = 0; i < combination.size(); i++) {
-//            int num = combination.get(i);
-//            if (num <= M) {
-//                System.out.println(num);
-//                break;
+        //오답
+//        for (int i = 0; i < N - 2; i++) {
+//            for (int j = 0; j < N - 2; j++) {
+//                sum = card.get(i) + card.get(i+1) + card.get(j+2);
+//                combination.add(sum);
 //            }
 //        }
+
+        combination.sort(Comparator.reverseOrder());
+
+
+        for (int i = 0; i < combination.size(); i++) {
+            int num = combination.get(i);
+            if (num <= M) {
+                System.out.println(num);
+                break;
+            }
+        }
 
 
 
