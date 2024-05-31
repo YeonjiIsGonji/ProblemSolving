@@ -3,10 +3,7 @@ package BAEKJOON;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class BOJ11399 {
     public static void main(String[] args) throws IOException {
@@ -15,18 +12,15 @@ public class BOJ11399 {
         StringTokenizer tk = new StringTokenizer(br.readLine(), " ");
 
         List<Integer> timeList = new ArrayList<>();
-        int sum = 0;
 
         while (tk.hasMoreTokens()) {
             timeList.add(Integer.parseInt(tk.nextToken()));
         }
 
-        // 정렬
-
-
-        // 답 계산
+        timeList.sort(Comparator.reverseOrder()); //내림차순 정렬(가장 큰 수부터 작은 수를 곱해야 한다)
+        int sum = 0;
         for (int i = 0; i < N; i++) {
-            sum += (N - i) * timeList.get(i);
+            sum += timeList.get(i) * (i + 1);
         }
 
         System.out.println(sum);
