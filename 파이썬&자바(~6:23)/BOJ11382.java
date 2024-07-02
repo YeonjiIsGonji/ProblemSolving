@@ -22,6 +22,7 @@ public class BOJ11382 {
         BigInteger num2 = new BigInteger(numList.get(1));
         BigInteger num3 = new BigInteger(numList.get(2));
 
+
         System.out.println(num1.add(num2).add(num3));
     }
 }

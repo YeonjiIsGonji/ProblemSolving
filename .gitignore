@@ -2,4 +2,59 @@
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+Last login: Tue Jul  2 22:15:45 on ttys000
+user@AL02261966 ProblemSolving % ../
+zsh: permission denied: ../
+user@AL02261966 ProblemSolving % cd ../
+user@AL02261966 연지곤지 % cd 김영한\ 자바강의 
+user@AL02261966 김영한 자바강의 % ls -al
+total 24
+drwxr-xr-x   8 user  staff   256  6 30 23:20 .
+drwxr-xr-x@ 29 user  staff   928  6 18 17:53 ..
+-rw-r--r--@  1 user  staff  8196  7  2 17:07 .DS_Store
+drwxr-xr-x  13 user  staff   416  6 30 20:56 .git
+drwxr-xr-x   8 user  staff   256  6 30 23:24 practice
+drwxr-xr-x@ 14 user  staff   448  6  3 09:17 강의안1_java-입문(intro)
+drwxr-xr-x@ 16 user  staff   512  4 11 20:06 강의안2_java-초급(basic)
+drwxr-xr-x@ 14 user  staff   448  5  8 10:27 강의안3_java-중급1(mid1)
+user@AL02261966 김영한 자바강의 % cd practice 
+user@AL02261966 practice % ls -al
+total 24
+drwxr-xr-x   8 user  staff   256  6 30 23:24 .
+drwxr-xr-x   8 user  staff   256  6 30 23:20 ..
+-rw-r--r--@  1 user  staff  6148  6 30 23:27 .DS_Store
+drwxr-xr-x  14 user  staff   448  7  2 10:38 .git
+-rw-r--r--   1 user  staff   525  6 30 23:24 .gitignore
+drwxr-xr-x   7 user  staff   224  6 30 23:13 java-basic
+drwxr-xr-x   6 user  staff   192  6 30 23:05 java-intro
+drwxr-xr-x   6 user  staff   192  6 30 22:40 java-mid1
+user@AL02261966 practice % vi .gitignore
 
+# Created by https://www.toptal.com/developers/gitignore/api/java
+# Edit at https://www.toptal.com/developers/gitignore?templates=java
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.iml
+.idea/
+**/.idea/
+BOJ/out/

@@ -1,5 +1,0 @@
-T = int(input())
-li_s = (input().split())
-# R = int(list[0])
-S = list(li_s[1])
-print(S)
