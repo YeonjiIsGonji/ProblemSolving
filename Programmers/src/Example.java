@@ -1,28 +1,28 @@
 import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.Deque;
 
 public class Example {
     public static void main(String[] args) {
-            Queue<Integer> q = new ArrayDeque<>();
+        Deque<Integer> stack = new ArrayDeque<>();
 
-            // enqueue
-            q.add(1); // q: [1]
-            q.add(2); // q: [1, 2]
-            q.add(3); // q: [1, 2, 3]
+        // push
+        stack.push(1); // s: [1]
+        stack.push(2); // s: [2, 1]
+        stack.push(3); // s: [3, 2, 1]
 
-            // front, dequeue
-            System.out.println(q.peek()); // 출력: 1 // q: [1, 2, 3]
-            System.out.println(q.remove()); // 출력: 1 // q: [2, 3]
-            System.out.println(q.remove()); // 출력: 2 // q: [3]
+        // top, pop
+        System.out.println(stack.peek()); // 출력: 3 // s: [3, 2, 1]
+        System.out.println(stack.pop()); // 출력: 3 // s: [2, 1]
+        System.out.println(stack.pop()); // 출력: 2 // s: [1]
 
-            // enqueue
-            q.add(4); // q: [3, 4]
-            q.add(5); // q: [3, 4, 5]
+        // push
+        stack.push(4); // s: [4, 1]
+        stack.push(5); // s: [5, 4, 1]
 
-            // empty
-            while (!q.isEmpty()) {
-                System.out.println(q.remove());
-            }
+        // empty
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop());
         }
     }
+}
 
