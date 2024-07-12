@@ -71,10 +71,10 @@ public class BOJ2563 {
             int s2Top = s2Bottom + 10;
             // y축 비교
             if (squareArray[i+1][0] < squareArray[i][0] + 10 && s2Bottom < s1Top) {
-                x = 10 -
+                //x = 10 -
             }
             int diffX = Math.abs(squareArray[i+1][0] - squareArray[i][0]);
-            if (0 <diffX < 10)
+            //if (0 <diffX < 10)
 
         }
 
