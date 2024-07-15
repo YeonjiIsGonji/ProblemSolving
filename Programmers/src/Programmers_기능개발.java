@@ -1,4 +1,6 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 public class Programmers_기능개발 {
@@ -83,6 +85,33 @@ public class Programmers_기능개발 {
 
         return answer;
     }
+
+    public int[] solution3(int[] progresses, int[] speeds) {
+        int N = progresses.length;
+        List<Integer> answer = new ArrayList<>();
+        int ind = 0;
+
+        while (ind < N) {
+            // 하루를 시뮬레이션 진행
+            for (int i = 0; i < N; i++) {
+                progresses[i] += speeds[i];
+            }
+
+            // 배포 가능한지 확인.
+            int releaseProject = 0;
+            while (ind < N && progresses[ind] >= 100) {
+                ind++;
+                releaseProject++;
+            }
+
+            if (releaseProject != 0) {
+                answer.add(releaseProject);
+            }
+        }
+
+        return answer.stream().mapToInt(Integer::intValue).toArray();
+    }
+
 
     public static void main(String[] args) {
         int[] progresses = {93, 30, 55};
