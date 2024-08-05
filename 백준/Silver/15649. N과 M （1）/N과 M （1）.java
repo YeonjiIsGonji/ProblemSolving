@@ -1,53 +1,43 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static boolean[] visited;
     public static void main(String[] args) throws IOException {
+        //BOJ15649
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer tk = new StringTokenizer(br.readLine());
-
         int N = Integer.parseInt(tk.nextToken());
         int M = Integer.parseInt(tk.nextToken());
-
-        // 1. numbs 만들기
-        int[] numbs = new int[N];
+        int[] num = new int[N];
         int[] arr = new int[M];
-        boolean[] visited = new boolean[N];
+        visited = new boolean[N];
 
-        //List<Integer> arr = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            numbs[i] = i + 1;
+            num[i] = i + 1;
         }
 
-        backtracking(numbs, arr, visited, M, 0);
+        backtracking(num, arr, 0);
+        bw.flush();
     }
 
-    private static void backtracking(int[] numbs, int[] arr, boolean[] visited, int M, int index) {
-        if (index == M) {
-            for (int i = 0; i < M; i++) {
-                System.out.print(arr[i] + " ");
+    static void backtracking(int[]num, int[] arr, int arrIndex) throws IOException {
+        if (arrIndex == arr.length) {
+            for (int i = 0; i < arr.length; i++) {
+                bw.write(arr[i] + " ");
             }
-            System.out.println();
+            bw.write("\n");
             return;
         }
 
-        for (int i = 0; i < numbs.length; i++) {
-            // numbs[i] 를 넣을 수 있으면 넣고 백트레킹
-            if (visited[i] == false) {
+        for (int i = 0; i < num.length; i++) {
+            if (!visited[i]) {
                 visited[i] = true;
-                arr[index] = numbs[i];
-
-                backtracking(numbs, arr, visited, M, index + 1);
-
-                arr[index] = 0;
+                arr[arrIndex] = num[i];
+                backtracking(num, arr, arrIndex + 1);
                 visited[i] = false;
             }
         }
-
     }
-
-
 }
