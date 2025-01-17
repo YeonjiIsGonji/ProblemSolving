@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Main {
@@ -19,9 +18,9 @@ public class Main {
         int[][] graph = new int[N][N];
 
         for (int i = 0; i < N; i++) {
-            String[] input = br.readLine().split("");
+            String input = br.readLine();
             for (int j = 0; j < N; j++) {
-                graph[i][j] = Integer.parseInt(input[j]);
+                graph[i][j] = input.charAt(j) - '0';
             }
         }
 
@@ -35,17 +34,17 @@ public class Main {
         for (int i = 0; i < N; i++) {
             Arrays.fill(dist[i], Integer.MAX_VALUE);
         }
-
+        boolean[][] visit = new boolean[N][N];
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
 
+        Queue<int[]> q = new ArrayDeque<>();
+        q.offer(new int[]{0, 0});
         if (graph[0][0] == 1) {
             dist[0][0] = 0;
         } else {
             dist[0][0] = 1;
         }
-        Queue<int[]> q = new ArrayDeque<>();
-        q.offer(new int[]{0, 0});
 
         while (!q.isEmpty()) {
             int[] curNode = q.poll();
@@ -57,7 +56,7 @@ public class Main {
                 int nextY = curY + dy[i];
                 if (0 <= nextX && nextX < N && 0 <= nextY && nextY < N) {
                     if (graph[nextX][nextY] == 1) {
-                        if (dist[nextX][nextY] > dist[curX][curY]) {
+                        if (dist[nextX][nextY] > dist[curX][curY] + 0) {
                             dist[nextX][nextY] = dist[curX][curY];
                             q.offer(new int[]{nextX, nextY});
                         }
