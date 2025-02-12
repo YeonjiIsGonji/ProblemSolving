@@ -1,15 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 public class Main {
-    static int M;
-    static int N;
-    static int H;
     static int[][][] graph;
     static int[][][] day;
+    static Queue<int[]> start;
+    static int H;
+    static int M;
+    static int N;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,71 +18,75 @@ public class Main {
         N = Integer.parseInt(input[1]);
         H = Integer.parseInt(input[2]);
 
-        graph = new int[H][N][M];
+        int zeroTomatoCount = 0;
+        start = new ArrayDeque<>();
+
         day = new int[H][N][M];
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < N; j++) {
+                Arrays.fill(day[i][j], Integer.MAX_VALUE);
+            }
+        }
 
-        int zeroCount = 0;
-        Queue<int[]> q = new ArrayDeque<>();
-
-        for (int h = 0; h < H; h++) {
-            for (int i = 0; i < N; i++) {
+        graph = new int[H][N][M];
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < N; j++) {
                 input = br.readLine().split(" ");
-                for (int j = 0; j < M; j++) {
-                    graph[h][i][j] = Integer.parseInt(input[j]);
-                    if (graph[h][i][j] == 0) {
-                        zeroCount++;
-                    } else if (graph[h][i][j] == 1) {
-                        q.offer(new int[]{h, i, j});
-                    }
-                }
-            }
-        }
-
-        if (zeroCount == 0) {
-            System.out.println(0);
-            return;
-        }
-
-        bfs(q);
-
-        int maxDay = 0;
-
-        for (int h = 0; h < H; h++) {
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
-                    if (graph[h][i][j] == 0) {
-                        System.out.println(-1);
-                        return;
+                for (int k = 0; k < M; k++) {
+                    int tomato = Integer.parseInt(input[k]);
+                    graph[i][j][k] = tomato;
+                    if (tomato == 1) {
+                        start.offer(new int[]{i, j, k});
+                        day[i][j][k] = 0;
+                    } else if (tomato == 0) {
+                        zeroTomatoCount++;
                     } else {
-                        maxDay = Math.max(maxDay, day[h][i][j]);
+                        day[i][j][k] = 0;
                     }
                 }
             }
-
         }
-        System.out.println(maxDay);
+
+        if (zeroTomatoCount == 0) {
+            System.out.println("0");
+        } else {
+            bfs();
+            int maxDay = 0;
+            for (int i = 0; i < H; i++) {
+                for (int j = 0; j < N; j++) {
+                    for (int k = 0; k < M; k++) {
+                        maxDay = Math.max(maxDay, day[i][j][k]);
+                    }
+                }
+            }
+            if (maxDay == Integer.MAX_VALUE) {
+                System.out.println("-1");
+            } else {
+                System.out.println(maxDay);
+            }
+        }
+
     }
 
-    public static void bfs(Queue<int[]> q) {
-        int[] dx = {-1, 1, 0, 0, 0, 0};
-        int[] dy = {0, 0, -1, 1, 0, 0};
-        int[] dz = {0, 0, 0, 0, -1, 1};
+    public static void bfs() {
+        int[] dh = {-1, 1, 0, 0, 0, 0};
+        int[] dx = {0, 0, -1, 1, 0, 0};
+        int[] dy = {0, 0, 0, 0, -1, 1};
 
-        while (!q.isEmpty()) {
-            int[] curNode = q.poll();
-            int curZ = curNode[0];
-            int curX = curNode[1];
-            int curY = curNode[2];
-
+        while (!start.isEmpty()) {
+            int[] node = start.poll();
+            int curH = node[0];
+            int curX = node[1];
+            int curY = node[2];
             for (int i = 0; i < 6; i++) {
+                int nextH = curH + dh[i];
                 int nextX = curX + dx[i];
                 int nextY = curY + dy[i];
-                int nextZ = curZ + dz[i];
 
-                if (0<= nextZ && nextZ < H && 0 <= nextX && nextX < N && 0 <= nextY && nextY < M && graph[nextZ][nextX][nextY] == 0) {
-                    day[nextZ][nextX][nextY] = day[curZ][curX][curY] + 1;
-                    graph[nextZ][nextX][nextY] = 1;
-                    q.offer(new int[]{nextZ, nextX, nextY});
+                if (0 <= nextH && nextH < H && 0 <= nextX && nextX < N && 0 <= nextY && nextY < M && graph[nextH][nextX][nextY] == 0) {
+                    start.offer(new int[]{nextH, nextX, nextY});
+                    day[nextH][nextX][nextY] = day[curH][curX][curY] + 1;
+                    graph[nextH][nextX][nextY] = 1;
                 }
             }
         }
