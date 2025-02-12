@@ -49,22 +49,26 @@ public class Main {
 
         if (zeroTomatoCount == 0) {
             System.out.println("0");
-        } else {
-            bfs();
-            int maxDay = 0;
-            for (int i = 0; i < H; i++) {
-                for (int j = 0; j < N; j++) {
-                    for (int k = 0; k < M; k++) {
+            return;
+        }
+
+        bfs();
+        int maxDay = 0;
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < N; j++) {
+                for (int k = 0; k < M; k++) {
+                    if (maxDay == Integer.MAX_VALUE) {
+                        System.out.println("-1");
+                        return;
+                    } else {
                         maxDay = Math.max(maxDay, day[i][j][k]);
                     }
                 }
             }
-            if (maxDay == Integer.MAX_VALUE) {
-                System.out.println("-1");
-            } else {
-                System.out.println(maxDay);
-            }
         }
+
+        System.out.println(maxDay);
+
 
     }
 
