@@ -46,9 +46,8 @@ public class Main {
             }
 
             bw.write(String.valueOf(count));
-            if (i < T - 1) {
-                bw.newLine();
-            }
+            bw.newLine();
+            
         }
 
         bw.flush();
